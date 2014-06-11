@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/californium-0.18.6-final.jar" sourcepath="lib/californium-0.18.6-final-sources.jar"/>
+	<classpathentry kind="lib" path="lib/element-connector-0.2-final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
