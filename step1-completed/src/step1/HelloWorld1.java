@@ -1,22 +1,22 @@
 package step1;
 
-import ch.ethz.inf.vs.californium.server.Server;
-import ch.ethz.inf.vs.californium.server.resources.CoapExchange;
-import ch.ethz.inf.vs.californium.server.resources.ResourceBase;
+import org.eclipse.californium.core.CoapResource;
+import org.eclipse.californium.core.CoapServer;
+import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class HelloWorld1 {
 
     public static void main(String[] args) {
 
         // binds on UDP port 5683
-        Server server = new Server();
+        CoapServer server = new CoapServer();
 
         server.add(new HelloResource());
 
         server.start();
     }
 
-    public static class HelloResource extends ResourceBase {
+    public static class HelloResource extends CoapResource {
         public HelloResource() {
 
             // resource identifier

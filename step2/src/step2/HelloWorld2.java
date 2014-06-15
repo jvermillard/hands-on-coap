@@ -1,15 +1,15 @@
 package step2;
 
-import ch.ethz.inf.vs.californium.server.Server;
-import ch.ethz.inf.vs.californium.server.resources.CoapExchange;
-import ch.ethz.inf.vs.californium.server.resources.ResourceBase;
+import org.eclipse.californium.core.CoapResource;
+import org.eclipse.californium.core.CoapServer;
+import org.eclipse.californium.core.server.resources.CoapExchange;
 
 public class HelloWorld2 {
 
     public static void main(String[] args) {
 
         // binds on UDP port 5683
-        Server server = new Server();
+        CoapServer server = new CoapServer();
 
         // "hello"
         server.add(new HelloResource());
@@ -21,7 +21,7 @@ public class HelloWorld2 {
         server.start();
     }
 
-    public static class HelloResource extends ResourceBase {
+    public static class HelloResource extends CoapResource {
         public HelloResource() {
 
             // resource identifier
@@ -37,7 +37,7 @@ public class HelloWorld2 {
         }
     }
 
-    public static class AnotherResource extends ResourceBase {
+    public static class AnotherResource extends CoapResource {
         public AnotherResource() {
 
             // resource identifier
@@ -53,14 +53,14 @@ public class HelloWorld2 {
         }
     }
 
-    public static class RemovableResource extends ResourceBase {
+    public static class RemovableResource extends CoapResource {
         public RemovableResource() {
             super("removeme!");
         }
         // TODO
     }
 
-    public static class TimeResource extends ResourceBase {
+    public static class TimeResource extends CoapResource {
 
         public TimeResource() {
             super("time");
@@ -68,7 +68,7 @@ public class HelloWorld2 {
         // TODO
     }
 
-    public static class WritableResource extends ResourceBase {
+    public static class WritableResource extends CoapResource {
 
         public String value = "to be replaced";
 

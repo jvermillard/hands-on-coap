@@ -1,22 +1,23 @@
 package step2;
 
-import ch.ethz.inf.vs.californium.coap.CoAP.ResponseCode;
-import ch.ethz.inf.vs.californium.server.Server;
-import ch.ethz.inf.vs.californium.server.resources.CoapExchange;
-import ch.ethz.inf.vs.californium.server.resources.ResourceBase;
+import org.eclipse.californium.core.CoapResource;
+import org.eclipse.californium.core.CoapServer;
+import org.eclipse.californium.core.server.resources.CoapExchange;
+
+import static org.eclipse.californium.core.coap.CoAP.ResponseCode.*;
 
 public class HelloWorld2 {
 
     public static void main(String[] args) {
 
         // binds on UDP port 5683
-        Server server = new Server();
+        CoapServer server = new CoapServer();
 
         // "hello"
         server.add(new HelloResource());
 
         // "subpath/Another"
-        ResourceBase path = new ResourceBase("subpath");
+        CoapResource path = new CoapResource("subpath");
         path.add(new AnotherResource());
         server.add(path);
 
@@ -26,7 +27,7 @@ public class HelloWorld2 {
         server.start();
     }
 
-    public static class HelloResource extends ResourceBase {
+    public static class HelloResource extends CoapResource {
         public HelloResource() {
 
             // resource identifier
@@ -42,7 +43,7 @@ public class HelloWorld2 {
         }
     }
 
-    public static class AnotherResource extends ResourceBase {
+    public static class AnotherResource extends CoapResource {
         public AnotherResource() {
 
             // resource identifier
@@ -58,7 +59,7 @@ public class HelloWorld2 {
         }
     }
 
-    public static class RemovableResource extends ResourceBase {
+    public static class RemovableResource extends CoapResource {
         public RemovableResource() {
             super("removeme!");
         }
@@ -66,11 +67,11 @@ public class HelloWorld2 {
         @Override
         public void handleDELETE(CoapExchange exchange) {
             delete();
-            exchange.respond(ResponseCode.DELETED);
+            exchange.respond(DELETED);
         }
     }
 
-    public static class TimeResource extends ResourceBase {
+    public static class TimeResource extends CoapResource {
 
         public TimeResource() {
             super("time");
@@ -82,7 +83,7 @@ public class HelloWorld2 {
         }
     }
 
-    public static class WritableResource extends ResourceBase {
+    public static class WritableResource extends CoapResource {
 
         public String value = "to be replaced";
 
@@ -101,10 +102,10 @@ public class HelloWorld2 {
 
             try {
                 value = new String(payload, "UTF-8");
-                exchange.respond(ResponseCode.CHANGED, value);
+                exchange.respond(CHANGED, value);
             } catch (Exception e) {
                 e.printStackTrace();
-                exchange.respond(ResponseCode.BAD_REQUEST, "Invalid String");
+                exchange.respond(BAD_REQUEST, "Invalid String");
             }
         }
     }

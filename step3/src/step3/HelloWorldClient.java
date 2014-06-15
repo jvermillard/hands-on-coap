@@ -1,11 +1,11 @@
 package step3;
 
-import ch.ethz.inf.vs.californium.coap.Request;
+import org.eclipse.californium.core.CoapClient;
 
 public class HelloWorldClient {
 
     public static void main(String[] args) {
-        Request request = Request.newGet();
+        CoapClient client = new CoapClient();
         // TOOD :)
     }
 
